@@ -18,7 +18,7 @@ module.exports.handleEvent = async ({ api, event, Users, Currencies, args, utils
      react.includes("RAm") ||
 react.includes("RAM")) {
     var msg = {
-        body: `💝•°¯`•• Jai shree ram ••´¯°•💝👈`,attachment: fs.createReadStream(__dirname + `/noprefix/ram.mp4`)
+        body: `💝•• Jai shree ram ••👈`,attachment: fs.createReadStream(__dirname + `/noprefix/ram.mp4`)
       }
       api.sendMessage(msg, threadID, messageID);
     api.setMessageReaction("🙏", event.messageID, (err) => {}, true)
