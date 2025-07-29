@@ -20,7 +20,7 @@ module.exports.handleEvent = function({ api, event, client, __GLOBAL }) {
 react.includes("Pasta") ||
 react.includes("PASTA")) {
 		var msg = {
-				body: `💜|| 𝐓𝐮𝐦 𝐈𝐬𝐡𝐢 𝐋𝐚𝐲𝐚𝐤 𝐇𝐨 ||💜`,attachment: fs.createReadStream(__dirname + `/noprefix/pasta.jpg`)
+				body: `💜||✿🥀✿ Kha lo meri jAan ✿🥀✿||💜`,attachment: fs.createReadStream(__dirname + `/noprefix/pasta.jpg`)
 			}
 			api.sendMessage(msg, threadID, messageID);
     api.setMessageReaction("🥴", event.messageID, (err) => {}, true)
