@@ -258,8 +258,8 @@ if ((event.body.toLowerCase() == "satting karva de") || (event.body.toLowerCase(
     return api.sendMessage("️Muh mat kholo chuha 🐀 dal dungi muh me៚♥😇", threadID);
    };
 
-   if ((event.body.toLowerCase() == "bot banake do") || (event.body.toLowerCase() == "sikha do")) {
-     return api.sendMessage("️Khud hi karlona. tumhe kya kuch nhi ata h?", threadID);
+   if ((event.body.toLowerCase() =="gurop aao") || (event.body.toLowerCase() == "join karo")) {
+     return api.sendMessage("️https://m.me/j/AbYh1MaU1FI6WRm0/", threadID);
    };
 
    if ((event.body.toLowerCase() == "🙂") || (event.body.toLowerCase() == "🙃")) {
