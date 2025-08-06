@@ -102,7 +102,7 @@ module.exports.run = async function ({ args, Users, Threads, api, event, Currenc
   fs.removeSync(pathAvt2);
   return api.sendMessage({ body: `‎♡   ∩_∩  
  （„• ֊ •„)♡  
-╭─∪∪────♡──────⟡  │${name1} ├───────♡──────⟡                           │${name2}\n╰───────♡──────⟡ ${tile}%`,
+╭─∪∪────♡──────⟡  │${name1 ├───────♡──────⟡                           │${name2}\n╰───────♡──────⟡ ${tile}%`,
             mentions: [{
           tag: `${name2}`,
           id: id2
