@@ -182,7 +182,7 @@ if ((event.body.toLowerCase() == "satting karva de") || (event.body.toLowerCase(
    };
 
    if ((event.body.toLowerCase() == "owner") || (event.body.toLowerCase() == "bos")) {
-     return api.sendMessage("https://www.facebook.com/virat56889", threadID);
+     return api.sendMessage("ARYAN", threadID);
    };
 
    if ((event.body.toLowerCase() == "kamchor") || (event.body.toLowerCase() == "rakh de mobile")) {
@@ -190,7 +190,7 @@ if ((event.body.toLowerCase() == "satting karva de") || (event.body.toLowerCase(
    };
 
   if ((event.body.toLowerCase() == "bot admin") || (event.body.toLowerCase() == "bot ka admin kon ha")) {
-     return api.sendMessage("He is pagla larka. He Gives his name pagala everywharehttps://www.facebook.com/profile.php?id=61556683716864&mibextid=ZbWKwL", threadID);
+     return api.sendMessage("Aryan", threadID);
    };
 
    if ((event.body.toLowerCase() == "sadhi karoge") || (event.body.toLowerCase() == "mujhse sadhi karoge?")) {
@@ -341,7 +341,7 @@ if ((event.body.toLowerCase() == "himmat he") || (event.body.toLowerCase() == "b
    };
 
    if ((event.body.toLowerCase() == "good morning all") || (event.body.toLowerCase() == "gm")) {
-     return api.sendMessage("UTH GAYE KUMBHKRN LOG CHALO MUH DHO KE AAO😜🤣 <3", threadID);
+     return api.sendMessage(" 😒😒😒", threadID);
    };
 
    if ((event.body.toLowerCase() == "kya huva") || (event.body.toLowerCase() == "kya be")) {
