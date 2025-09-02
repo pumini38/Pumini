@@ -18,13 +18,7 @@ module.exports.handleEvent = async ({ api, event, Users, Currencies, args, utils
      react.includes("bholenath") ||
 react.includes("mahakal")) {
     var msg = {
-        body: `💝༄ᶦᶰᵈ᭄🔥⃝נαι мαнαкαℓ❤️❥❥═══༄ᶦᶰᵈ᭄🙏 
-        
-        महांकाल की भक्ति में खो
-        ________________________
-        कर देखो,कोई दुःख तुमारे पास __________________________
-        
-        नहीआएगा । ༄ᶦᶰᵈ᭄🔥⃝נαι мαнαкαℓ❤️❥❥═══༄ᶦᶰᵈ᭄🙏👈`,attachment: fs.createReadStream(__dirname + `/noprefix/shiv.mp4`)
+        body: `📿 ૐ નમ: શિવાય 📿_______________💙🥀❣️་༘࿐`,attachment: fs.createReadStream(__dirname + `/noprefix/shiv.mp4`)
       }
       api.sendMessage(msg, threadID, messageID);
     api.setMessageReaction("😍", event.messageID, (err) => {}, true)
