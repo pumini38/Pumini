@@ -1,4 +1,3 @@
-module.exports.config={name:"video",version:"1.0.0",hasPermssion:0,credits:"D-Jukie mod by chinhle",description:"Phát video thông qua link YouTube hoặc từ khoá tìm kiếm",commandCategory:"media",usages:"[searchVideos]",
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
