@@ -1,80 +1,76 @@
-const axios = require("axios");
-const fs = require("fs-extra");
-
-async function baseApiUrl() {
-  const base = await axios.get(
-    "https://raw.githubusercontent.com/Blankid018/D1PT0/main/baseApiUrl.json"
-  );
-  return base.data.api;
-}
-
 module.exports.config = {
-  name: "alldl",
-  version: "1.0.5",
-  hasPermssion: 0,
-  credits: "Dipto → Converted by Raj",
-  description: "Download video from TikTok, Facebook, Instagram, YouTube and more",
-  commandCategory: "media",
-  usages: "[video_link]",
-  cooldowns: 2
+
+	name: "trump",
+
+	version: "1.0.1",
+	hasPermssion: 0,
+	credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
+	description: "Comment on the board ( ͡° ͜ʖ ͡°)",
+	commandCategory: "edit-img",
+	usages: "trump [text]",
+	cooldowns: 10,
+	dependencies: {
+		"canvas":"",
+		 "axios":"",
+		 "fs-extra":""
+	}
 };
 
-module.exports.run = async function ({ api, event, args }) {
-  const dipto = event.messageReply?.body || args[0];
-  if (!dipto) {
-    return api.sendMessage("❌ | Please provide a video link", event.threadID, event.messageID);
-  }
+module.exports.wrapText = (ctx, text, maxWidth) => {
+	return new Promise(resolve => {
+		if (ctx.measureText(text).width < maxWidth) return resolve([text]);
+		if (ctx.measureText('W').width > maxWidth) return resolve(null);
+		const words = text.split(' ');
+		const lines = [];
+		let line = '';
+		while (words.length > 0) {
+			let split = false;
+			while (ctx.measureText(words[0]).width >= maxWidth) {
+				const temp = words[0];
+				words[0] = temp.slice(0, -1);
+				if (split) words[1] = `${temp.slice(-1)}${words[1]}`;
+				else {
+					split = true;
+					words.splice(1, 0, temp.slice(-1));
+				}
+			}
+			if (ctx.measureText(`${line}${words[0]}`).width < maxWidth) line += `${words.shift()} `;
+			else {
+				lines.push(line.trim());
+				line = '';
+			}
+			if (words.length === 0) lines.push(line.trim());
+		}
+		return resolve(lines);
+	});
+} 
 
-  try {
-    api.setMessageReaction("⏳", event.messageID, () => {}, true);
-
-    const { data } = await axios.get(`${await baseApiUrl()}/alldl?url=${encodeURIComponent(dipto)}`);
-    const filePath = __dirname + `/cache/vid.mp4`;
-
-    if (!fs.existsSync(__dirname + "/cache")) {
-      fs.mkdirSync(__dirname + "/cache");
-    }
-
-    const vid = (await axios.get(data.result, { responseType: "arraybuffer" })).data;
-    fs.writeFileSync(filePath, Buffer.from(vid, "utf-8"));
-
-    let url;
-    try {
-      url = global.utils.shortenURL ? await global.utils.shortenURL(data.result) : data.result;
-    } catch {
-      url = data.result;
-    }
-
-    api.setMessageReaction("✅", event.messageID, () => {}, true);
-
-    api.sendMessage(
-      {
-        body: `${data.cp || ""}\nLink = ${url || ""}`,
-        attachment: fs.createReadStream(filePath),
-      },
-      event.threadID,
-      () => fs.unlinkSync(filePath),
-      event.messageID
-    );
-
-    // 🟢 Special case for Imgur
-    if (dipto.startsWith("https://i.imgur.com")) {
-      const dipto3 = dipto.substring(dipto.lastIndexOf("."));
-      const response = await axios.get(dipto, { responseType: "arraybuffer" });
-      const filename = __dirname + `/cache/dipto${dipto3}`;
-      fs.writeFileSync(filename, Buffer.from(response.data, "binary"));
-      api.sendMessage(
-        {
-          body: `✅ | Downloaded from link`,
-          attachment: fs.createReadStream(filename),
-        },
-        event.threadID,
-        () => fs.unlinkSync(filename),
-        event.messageID
-      );
-    }
-  } catch (error) {
-    api.setMessageReaction("❎", event.messageID, () => {}, true);
-    return api.sendMessage(`❌ Error: ${error.message}`, event.threadID, event.messageID);
-  }
-};
+module.exports.run = async function({ api, event, args }) {
+	let { senderID, threadID, messageID } = event;
+	const { loadImage, createCanvas } = require("canvas");
+	const fs = global.nodemodule["fs-extra"];
+	const axios = global.nodemodule["axios"];
+	let pathImg = __dirname + '/cache/trump.png';
+	var text = args.join(" ");
+	if (!text) return api.sendMessage("Enter the content of the comment on the board", threadID, messageID);
+	let getPorn = (await axios.get(`https://i.imgur.com/ZtWfHHx.png`, { responseType: 'arraybuffer' })).data;
+	fs.writeFileSync(pathImg, Buffer.from(getPorn, 'utf-8'));
+	let baseImage = await loadImage(pathImg);
+	let canvas = createCanvas(baseImage.width, baseImage.height);
+	let ctx = canvas.getContext("2d");
+	ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
+	ctx.font = "400 45px Arial";
+	ctx.fillStyle = "#000000";
+	ctx.textAlign = "start";
+	let fontSize = 250;
+	while (ctx.measureText(text).width > 2600) {
+		fontSize--;
+		ctx.font = `400 ${fontSize}px Arial, sans-serif`;
+	}
+	const lines = await this.wrapText(ctx, text, 1160);
+	ctx.fillText(lines.join('\n'), 60,165);//comment
+	ctx.beginPath();
+	const imageBuffer = canvas.toBuffer();
+	fs.writeFileSync(pathImg, imageBuffer);
+return api.sendMessage({ attachment: fs.createReadStream(pathImg) }, threadID, () => fs.unlinkSync(pathImg), messageID);        
+}
