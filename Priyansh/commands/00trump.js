@@ -1,10 +1,11 @@
+//learn to eat, learn to speak, don't learn the habit of replacing cre 
 module.exports.config = {
 
 	name: "trump",
 
 	version: "1.0.1",
 	hasPermssion: 0,
-	credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
+	credits: "VIRAT SIANI",
 	description: "Comment on the board ( ͡° ͜ʖ ͡°)",
 	commandCategory: "edit-img",
 	usages: "trump [text]",
@@ -53,22 +54,22 @@ module.exports.run = async function({ api, event, args }) {
 	let pathImg = __dirname + '/cache/trump.png';
 	var text = args.join(" ");
 	if (!text) return api.sendMessage("Enter the content of the comment on the board", threadID, messageID);
-	let getPorn = (await axios.get(`https://i.imgur.com/ZtWfHHx.png`, { responseType: 'arraybuffer' })).data;
+	let getPorn = (await axios.get(`https://i.imgur.com/n25OwEp.jpeg`, { responseType: 'arraybuffer' })).data;
 	fs.writeFileSync(pathImg, Buffer.from(getPorn, 'utf-8'));
 	let baseImage = await loadImage(pathImg);
 	let canvas = createCanvas(baseImage.width, baseImage.height);
 	let ctx = canvas.getContext("2d");
 	ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
-	ctx.font = "400 45px Arial";
+	ctx.font = "400 18px Arial";
 	ctx.fillStyle = "#000000";
 	ctx.textAlign = "start";
-	let fontSize = 250;
-	while (ctx.measureText(text).width > 2600) {
+	let fontSize = 50;
+	while (ctx.measureText(text).width > 1200) {
 		fontSize--;
-		ctx.font = `400 ${fontSize}px Arial, sans-serif`;
+		ctx.font = `400 ${fontSize}px Arial`;
 	}
-	const lines = await this.wrapText(ctx, text, 1160);
-	ctx.fillText(lines.join('\n'), 60,165);//comment
+	const lines = await this.wrapText(ctx, text, 470);
+	ctx.fillText(lines.join('\n'), 15,75);//comment
 	ctx.beginPath();
 	const imageBuffer = canvas.toBuffer();
 	fs.writeFileSync(pathImg, imageBuffer);
